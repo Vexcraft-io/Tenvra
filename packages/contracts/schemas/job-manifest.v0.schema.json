@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tenvra.ai/schemas/job-manifest.v0.schema.json",
+  "title": "Tenvra Job Manifest v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocolVersion",
+    "jobId",
+    "jobType",
+    "backend",
+    "imageDigest",
+    "inputHashes",
+    "outputPrefix",
+    "deadline",
+    "resources",
+    "networkAllowlist",
+    "telemetryFields",
+    "reservedMinimumMinorUnits",
+    "currency",
+    "signature"
+  ],
+  "properties": {
+    "protocolVersion": { "type": "string", "pattern": "^0\\." },
+    "jobId": { "type": "string", "minLength": 1 },
+    "jobType": { "enum": ["evaluation", "lora-training"] },
+    "backend": { "enum": ["cuda", "rocm"] },
+    "imageDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "inputHashes": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+    },
+    "outputPrefix": { "type": "string", "minLength": 1 },
+    "deadline": { "type": "string", "format": "date-time" },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimumVramGb", "diskGb", "networkProfile"],
+      "properties": {
+        "minimumVramGb": { "type": "number", "exclusiveMinimum": 0 },
+        "diskGb": { "type": "number", "exclusiveMinimum": 0 },
+        "networkProfile": { "enum": ["evaluation", "lora-training"] }
+      }
+    },
+    "networkAllowlist": { "type": "array", "items": { "type": "string" } },
+    "telemetryFields": { "type": "array", "items": { "type": "string" } },
+    "reservedMinimumMinorUnits": { "type": "integer", "minimum": 0 },
+    "currency": { "enum": ["SEK", "EUR"] },
+    "signature": { "type": "string", "minLength": 1 }
+  }
+}

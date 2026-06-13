@@ -1,0 +1,6 @@
+Contact: https://github.com/mkungen89/tenvra/security/advisories/new
+Policy: https://github.com/mkungen89/tenvra/blob/main/SECURITY.md
+Preferred-Languages: en, sv
+Canonical: https://tenvra.ai/.well-known/security.txt
+Expires: 2027-06-13T00:00:00.000Z
+

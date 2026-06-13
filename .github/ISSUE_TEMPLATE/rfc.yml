@@ -1,0 +1,29 @@
+name: RFC proposal
+description: Propose a durable architecture, protocol, economic, or governance change
+title: "[RFC]: "
+labels: ["rfc", "needs-discussion"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+    validations:
+      required: true
+  - type: textarea
+    id: migration
+    attributes:
+      label: Compatibility and migration
+    validations:
+      required: true

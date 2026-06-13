@@ -1,0 +1,33 @@
+- name: bug
+  color: "d73a4a"
+  description: Reproducible defect
+- name: enhancement
+  color: "2ea44f"
+  description: Product or engineering improvement
+- name: security
+  color: "b60205"
+  description: Security hardening without vulnerability details
+- name: privacy
+  color: "6f42c1"
+  description: Privacy or data-protection impact
+- name: economics
+  color: "d4a72c"
+  description: Ledger, billing, rewards, or cost model
+- name: protocol
+  color: "0e8a16"
+  description: Compute protocol or compatibility
+- name: amd-rocm
+  color: "ed1c24"
+  description: AMD and ROCm support
+- name: nvidia-cuda
+  color: "76b900"
+  description: NVIDIA and CUDA support
+- name: documentation
+  color: "0075ca"
+  description: Documentation changes
+- name: rfc
+  color: "5319e7"
+  description: Durable design proposal
+- name: needs-triage
+  color: "ededed"
+  description: Requires initial review

@@ -1,0 +1,67 @@
+:root {
+  --tenvra-graphite-950: #080d0f;
+  --tenvra-graphite-900: #0d1417;
+  --tenvra-graphite-800: #152126;
+  --tenvra-graphite-700: #223239;
+  --tenvra-slate-300: #a9bac0;
+  --tenvra-slate-100: #e7eff1;
+  --tenvra-teal-500: #42c2b3;
+  --tenvra-teal-300: #84ded2;
+  --tenvra-amber-400: #e9ac52;
+  --tenvra-radius: 10px;
+  --tenvra-font-sans: "Source Sans 3", "Segoe UI", sans-serif;
+  --tenvra-font-mono: "JetBrains Mono", "Cascadia Code", monospace;
+}
+
+.tenvra-button {
+  border: 1px solid transparent;
+  border-radius: var(--tenvra-radius);
+  cursor: pointer;
+  font: 700 0.95rem/1 var(--tenvra-font-sans);
+  min-height: 44px;
+  padding: 0.8rem 1.1rem;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.tenvra-button:hover {
+  transform: translateY(-1px);
+}
+
+.tenvra-button--primary {
+  background: var(--tenvra-teal-500);
+  color: var(--tenvra-graphite-950);
+}
+
+.tenvra-button--secondary {
+  background: transparent;
+  border-color: var(--tenvra-graphite-700);
+  color: var(--tenvra-slate-100);
+}
+
+.tenvra-status-pill {
+  align-items: center;
+  background: color-mix(in srgb, var(--tenvra-teal-500) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--tenvra-teal-500) 45%, transparent);
+  border-radius: 999px;
+  color: var(--tenvra-teal-300);
+  display: inline-flex;
+  font: 600 0.75rem/1 var(--tenvra-font-mono);
+  letter-spacing: 0.08em;
+  min-height: 30px;
+  padding: 0 0.75rem;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tenvra-button {
+    transition: none;
+  }
+
+  .tenvra-button:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# JavaScript build output
+.next/
+.turbo/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Python
+.venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.py[cod]
+
+# Go
+bin/
+coverage.out
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Infrastructure
+.terraform/
+*.tfstate
+*.tfstate.*
+.tofu/
+
+# Supabase local state
+.supabase/
+
+# Editors and operating systems
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
