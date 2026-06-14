@@ -1,127 +1,242 @@
+<div align="center">
+
 # Tenvra
 
-> Open intelligence, shared value.
+### Open intelligence. Shared value.
 
-Tenvra is an early-stage initiative to build open coding intelligence with verifiable
-contributions from developers, researchers, and hardware operators.
+An open platform for building coding intelligence through verifiable contributions from
+developers, researchers, and independent hardware operators.
 
-This repository contains the platform foundation and the first Phase 1 validation workflow. It
-does not yet contain a distributed training network, payment system, public model, or token-based
-incentive.
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-6f5cff.svg)](LICENSE)
+[![Project Status: Alpha](https://img.shields.io/badge/Status-Alpha-f59e0b.svg)](#project-status)
+[![NVIDIA](https://img.shields.io/badge/Compute-NVIDIA-76b900.svg)](#vision)
+[![AMD](https://img.shields.io/badge/Compute-AMD-ed1c24.svg)](#vision)
+[![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-22c55e.svg)](CONTRIBUTING.md)
+
+[Vision](#vision) · [Architecture](#architecture) · [Quick Start](#quick-start) ·
+[Roadmap](ROADMAP.md) · [Contributing](CONTRIBUTING.md)
+
+</div>
+
+---
+
+## What Is Tenvra?
+
+Tenvra is an early-stage initiative exploring a community-powered foundation for coding AI.
+The long-term goal is a network where participants can contribute approved compute, help evaluate
+and improve models, and share in the value created by useful, verified work.
+
+The project is designed for cross-platform participation, including Linux, Windows, and macOS,
+with planned support for both NVIDIA CUDA and AMD ROCm hardware.
+
+> [!IMPORTANT]
+> Tenvra is currently in its validation and foundation phase. This repository does not yet contain
+> a distributed training network, public model, payment system, or cryptocurrency token.
 
 ## Vision
 
-Tenvra is designed around four principles:
+Today's most capable AI systems are increasingly expensive and concentrated behind closed
+infrastructure. Tenvra is investigating a different path:
 
-1. Open code and reproducible technical decisions.
-2. Licensed, documented training data and traceable model lineage.
-3. Verified useful work instead of speculative mining.
-4. Transparent contributor economics without a cryptocurrency token.
+- **Open development** with reproducible technical decisions and public protocols.
+- **Useful compute** directed toward approved training, evaluation, and research workloads.
+- **Verifiable contributions** so rewards reflect accepted work rather than raw uptime.
+- **Broad hardware support** across eligible NVIDIA and AMD systems.
+- **Transparent economics** with auditable contributor rewards and affordable model access.
+- **Responsible data** with documented licensing, provenance, and model lineage.
 
-Open community nodes are planned for approved training and evaluation workloads. Private customer
-prompts will only run on trusted, contracted infrastructure.
+Open community nodes are planned for approved workloads. Private customer prompts will only run on
+trusted, contracted infrastructure.
 
-## Repository Status
+## Project Status
 
-| Area                             | Status                         |
-| -------------------------------- | ------------------------------ |
-| Area                             | Status                         |
-| -------------------------------- | ------------------------------ |
-| Public validation website        | Implemented locally            |
-| Verified interest registration   | Implemented, services required |
-| Self-service data deletion       | Implemented, services required |
-| Protected qualification review   | Implemented locally            |
-| Protocol contracts               | Draft scaffold                 |
-| Coordinator service              | Minimal health service         |
-| Compute client                   | Minimal Go CLI scaffold        |
-| Verifier worker                  | Minimal Python scaffold        |
-| Distributed jobs                 | Not implemented                |
-| Payments and contributor rewards | Not implemented                |
-| Public model                     | Not released                   |
+Tenvra is currently building and validating the platform foundation.
 
-## Structure
+| Area                            | Current state                             |
+| ------------------------------- | ----------------------------------------- |
+| Public validation website       | Implemented locally                       |
+| Verified interest registration  | Implemented; production services required |
+| Self-service data deletion      | Implemented; production services required |
+| Protected operator review       | Implemented locally with an audit log     |
+| Protocol contracts              | Draft scaffold                            |
+| Coordinator service             | Minimal health service                    |
+| Compute client                  | Minimal Go CLI scaffold                   |
+| Verification worker             | Minimal Python scaffold                   |
+| Distributed workloads           | Planned                                   |
+| Contributor rewards and billing | Planned                                   |
+| Public coding model             | Not released                              |
+
+Progress is governed by evidence gates rather than launch-date promises. See the
+[full roadmap](ROADMAP.md).
+
+## Architecture
 
 ```text
-apps/web               Next.js public website and future portals
-apps/coordinator       TypeScript control-plane scaffold
-clients/compute        Go compute-client scaffold
-workers/verifier       Python verification-worker scaffold
-packages/contracts     Versioned job and result contracts
-packages/config        Shared brand and environment configuration
-packages/ui            Design tokens and shared UI primitives
-infrastructure         Supabase, OpenTofu, and container scaffolds
-docs                   Product, architecture, security, legal, and research plans
+                         Tenvra platform
+
+  Contributors                                      Platform users
+       │                                                   │
+       ▼                                                   ▼
+┌──────────────┐    signed jobs    ┌──────────────┐   ┌──────────────┐
+│ Compute node │◄─────────────────►│ Coordinator  │◄─►│ Web platform │
+│ Go client    │                   │ TypeScript   │   │ Next.js      │
+└──────┬───────┘                   └──────┬───────┘   └──────┬───────┘
+       │                                  │                  │
+       │ results                          │ verification     │ identity/data
+       ▼                                  ▼                  ▼
+┌──────────────┐                   ┌──────────────┐   ┌──────────────┐
+│ Work sandbox │                   │ Verifier     │   │ Supabase     │
+│ GPU workload │                   │ Python       │   │ PostgreSQL   │
+└──────────────┘                   └──────────────┘   └──────────────┘
 ```
 
-## Local Development
+The current repository is a monorepo containing the foundations for each planned system boundary:
 
-Prerequisites:
+| Path                 | Purpose                                                    |
+| -------------------- | ---------------------------------------------------------- |
+| `apps/web`           | Next.js website and future user/operator portals           |
+| `apps/coordinator`   | TypeScript control-plane service                           |
+| `clients/compute`    | Cross-platform Go compute-client scaffold                  |
+| `workers/verifier`   | Python verification-worker scaffold                        |
+| `packages/contracts` | Versioned job and result contracts                         |
+| `packages/config`    | Shared brand and environment configuration                 |
+| `packages/ui`        | Design tokens and shared UI primitives                     |
+| `infrastructure`     | Supabase, OpenTofu, and container foundations              |
+| `docs`               | Architecture, product, security, legal, and research plans |
 
-- Node.js 24 or newer
-- pnpm 10 or newer
-- Python 3.12 or newer for the verifier
-- Go 1.24 or newer for the compute client
-- Docker and OpenTofu only when working on those areas
+Detailed technical decisions live in [docs/architecture](docs/architecture) and
+[docs/adr](docs/adr).
+
+## Technology
+
+| Layer          | Current foundation               |
+| -------------- | -------------------------------- |
+| Web            | Next.js 16, React 19, TypeScript |
+| Coordinator    | Fastify, TypeScript              |
+| Data           | Supabase, PostgreSQL             |
+| Compute client | Go                               |
+| Verification   | Python                           |
+| Monorepo       | pnpm workspaces, Turborepo       |
+| Infrastructure | Docker, OpenTofu                 |
+| Quality        | ESLint, Prettier, Vitest, pgTAP  |
+
+## Quick Start
+
+### Requirements
+
+- Node.js 24+
+- pnpm 10+
+- Docker Desktop for local Supabase
+- Go 1.24+ when working on the compute client
+- Python 3.12+ when working on the verifier
+
+### Run the application
 
 ```bash
+git clone https://github.com/Vexcraft-io/Tenvra.git
+cd Tenvra
 pnpm install
 pnpm dev
 ```
 
-The website runs at `http://localhost:3000` and the coordinator health service at
-`http://localhost:4100/health`.
+The web application starts at [http://localhost:3000](http://localhost:3000), while the
+coordinator health endpoint is available at
+[http://localhost:4100/health](http://localhost:4100/health).
 
-Without Supabase and email credentials, the interest form runs in a non-persistent preview mode.
-See [infrastructure/supabase/README.md](infrastructure/supabase/README.md) for Phase 1 setup.
+### Run with local Supabase
 
-With Docker Desktop running, `pnpm supabase:start` launches the local Phase 1 database and Studio.
-The ignored `apps/web/.env.local` enables database-backed registration with local development
-verification links.
+```bash
+pnpm supabase:start
+pnpm supabase:db:reset
+pnpm dev
+```
 
-The protected operator queue is available at `http://localhost:3000/operator`. Local access
-credentials live only in the ignored environment file. Every qualification decision is written to
-an append-only database audit log.
+Copy `.env.example` to `apps/web/.env.local` and add the credentials shown by
+`pnpm supabase:status`. The operator review interface is then available at
+[http://localhost:3000/operator](http://localhost:3000/operator).
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the full development workflow.
+Read the [Supabase setup guide](infrastructure/supabase/README.md) for environment variables,
+email modes, migrations, and database tests.
+
+## Quality Checks
+
+```bash
+pnpm format:check
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm build
+pnpm contracts:validate
+pnpm supabase:db:lint
+pnpm supabase:db:test
+```
 
 ## Roadmap
 
-The project advances through explicit evidence gates:
+1. **Foundation**: repository, governance, security, contracts, and validation website.
+2. **Validation**: qualify contributors, GPU operators, researchers, and design partners.
+3. **Research pilot**: prove verifiable workloads across NVIDIA and AMD community nodes.
+4. **Compliance and security**: complete legal assessment, reviews, and penetration testing.
+5. **Paid beta**: launch trusted inference and auditable contributor economics with B2B partners.
 
-1. Validate contributor and customer interest.
-2. Prove verifiable evaluation and LoRA workloads on NVIDIA and AMD hardware.
-3. Run a ten-node external pilot.
-4. Complete legal, security, and economic reviews.
-5. Open a paid B2B design-partner beta.
+Milestones and success criteria are documented in [ROADMAP.md](ROADMAP.md) and the
+[product requirements](docs/product/product-requirements.md).
 
-See [ROADMAP.md](ROADMAP.md) and [docs/product/product-requirements.md](docs/product/product-requirements.md).
+## Documentation
 
-## Security And Privacy
-
-Do not report vulnerabilities through public issues. Follow [SECURITY.md](SECURITY.md).
-
-No secrets, customer code, personal data, or production credentials belong in this repository.
-Legal and privacy documents are planning drafts until reviewed by qualified Swedish and EU
-specialists.
+| Topic                 | Document                                                     |
+| --------------------- | ------------------------------------------------------------ |
+| Product requirements  | [Product requirements](docs/product/product-requirements.md) |
+| System architecture   | [Architecture documentation](docs/architecture)              |
+| Contributor economics | [Economics documentation](docs/economics)                    |
+| Security planning     | [Security documentation](docs/security)                      |
+| Governance            | [GOVERNANCE.md](GOVERNANCE.md)                               |
+| Project support       | [SUPPORT.md](SUPPORT.md)                                     |
+| Changelog             | [CHANGELOG.md](CHANGELOG.md)                                 |
 
 ## Contributing
 
-Contributions will use Developer Certificate of Origin sign-off. By contributing, you confirm that
-you have the right to submit the work under Apache License 2.0.
+Tenvra welcomes focused, reviewable contributions aligned with the published roadmap.
+Substantial protocol, security, economic, or governance changes should begin with an issue or RFC.
 
-Read:
+All contributions require a
+[Developer Certificate of Origin](https://developercertificate.org/) sign-off:
 
-- [CONTRIBUTING.md](CONTRIBUTING.md)
-- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
-- [GOVERNANCE.md](GOVERNANCE.md)
-- [SECURITY.md](SECURITY.md)
+```bash
+git commit -s -m "type: concise description"
+```
 
-## Brand Notice
+Before contributing, read:
 
-`Tenvra` and `tenvra.ai` are intended project identifiers. Public launch remains conditional on
-domain acquisition and professional trademark clearance. The Apache license covers source code,
-not the right to represent a fork as the official Tenvra service.
+- [Contribution guide](CONTRIBUTING.md)
+- [Code of conduct](CODE_OF_CONDUCT.md)
+- [Governance](GOVERNANCE.md)
+- [Security policy](SECURITY.md)
+
+## Security And Privacy
+
+Do not report vulnerabilities through public issues. Use a private GitHub security advisory as
+described in [SECURITY.md](SECURITY.md).
+
+Never commit secrets, customer code, personal data, production credentials, or unlicensed
+datasets. Legal and privacy documents remain planning drafts until reviewed by qualified Swedish
+and EU specialists.
 
 ## License
 
-Licensed under the [Apache License 2.0](LICENSE).
+Tenvra source code is licensed under the [Apache License 2.0](LICENSE).
+
+`Tenvra` and `tenvra.ai` are intended project identifiers. The source-code license does not grant
+the right to represent a fork as the official Tenvra service. Public launch remains subject to
+domain acquisition and professional trademark clearance.
+
+---
+
+<div align="center">
+
+**Tenvra is being built in the open, one verified step at a time.**
+
+[Explore the roadmap](ROADMAP.md) · [Read the docs](docs) ·
+[Join the project](CONTRIBUTING.md)
+
+</div>
