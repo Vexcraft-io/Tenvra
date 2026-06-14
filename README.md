@@ -5,8 +5,8 @@
 Tenvra is an early-stage initiative to build open coding intelligence with verifiable
 contributions from developers, researchers, and hardware operators.
 
-This repository currently contains the **platform scaffold only**. It does not yet contain a
-production waitlist, distributed training network, payment system, public model, or token-based
+This repository contains the platform foundation and the first Phase 1 validation workflow. It
+does not yet contain a distributed training network, payment system, public model, or token-based
 incentive.
 
 ## Vision
@@ -23,17 +23,21 @@ prompts will only run on trusted, contracted infrastructure.
 
 ## Repository Status
 
-| Area                             | Status                  |
-| -------------------------------- | ----------------------- |
-| Public website scaffold          | Available               |
-| Protocol contracts               | Draft scaffold          |
-| Coordinator service              | Minimal health service  |
-| Compute client                   | Minimal Go CLI scaffold |
-| Verifier worker                  | Minimal Python scaffold |
-| Waitlist and admin               | Not implemented         |
-| Distributed jobs                 | Not implemented         |
-| Payments and contributor rewards | Not implemented         |
-| Public model                     | Not released            |
+| Area                             | Status                         |
+| -------------------------------- | ------------------------------ |
+| Area                             | Status                         |
+| -------------------------------- | ------------------------------ |
+| Public validation website        | Implemented locally            |
+| Verified interest registration   | Implemented, services required |
+| Self-service data deletion       | Implemented, services required |
+| Protected qualification review   | Implemented locally            |
+| Protocol contracts               | Draft scaffold                 |
+| Coordinator service              | Minimal health service         |
+| Compute client                   | Minimal Go CLI scaffold        |
+| Verifier worker                  | Minimal Python scaffold        |
+| Distributed jobs                 | Not implemented                |
+| Payments and contributor rewards | Not implemented                |
+| Public model                     | Not released                   |
 
 ## Structure
 
@@ -66,6 +70,17 @@ pnpm dev
 
 The website runs at `http://localhost:3000` and the coordinator health service at
 `http://localhost:4100/health`.
+
+Without Supabase and email credentials, the interest form runs in a non-persistent preview mode.
+See [infrastructure/supabase/README.md](infrastructure/supabase/README.md) for Phase 1 setup.
+
+With Docker Desktop running, `pnpm supabase:start` launches the local Phase 1 database and Studio.
+The ignored `apps/web/.env.local` enables database-backed registration with local development
+verification links.
+
+The protected operator queue is available at `http://localhost:3000/operator`. Local access
+credentials live only in the ignored environment file. Every qualification decision is written to
+an append-only database audit log.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full development workflow.
 

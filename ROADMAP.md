@@ -2,12 +2,14 @@
 
 ## Phase 0 - Foundation
 
-- Repository scaffold, governance, security policy, contracts, and CI.
+- Repository scaffold, governance, security policy, contracts, and CI. **Implemented.**
 - Company formation, domain acquisition, and trademark clearance.
-- Public website and verified interest form.
+- Public website and verified interest form. **Implemented locally; production services and legal
+  launch gate remain.**
 
 ## Phase 1 - Validation
 
+- Protected operator qualification pipeline. **Implemented locally.**
 - 100 verified sign-ups.
 - 30 GPU owners, including 15 pilot-compatible systems.
 - 20 qualified developers or researchers.

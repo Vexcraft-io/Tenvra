@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: `${brand.name} | ${brand.tagline}`,
   description:
     "An early-stage initiative for open coding intelligence and verifiable contributor work.",
+  referrer: "no-referrer",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

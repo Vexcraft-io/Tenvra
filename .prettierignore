@@ -1,7 +1,10 @@
 .next
+.mypy_cache
+.pytest_cache
+.ruff_cache
 .turbo
+__pycache__
 coverage
 dist
 node_modules
 pnpm-lock.yaml
-

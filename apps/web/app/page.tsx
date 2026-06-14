@@ -34,6 +34,7 @@ export default function Home() {
         <div className="nav-links">
           <Link href="/vision">Vision</Link>
           <Link href="/roadmap">Roadmap</Link>
+          <Link href="/interest">Take part</Link>
           <a href="https://github.com/mkungen89/tenvra">GitHub</a>
         </div>
       </nav>
@@ -47,12 +48,12 @@ export default function Home() {
             contributions from developers, researchers, and hardware operators.
           </p>
           <div className="actions">
-            <Link className="primary-link" href="/roadmap">
+            <Link className="primary-link" href="/interest">
+              Register interest
+            </Link>
+            <Link className="secondary-link" href="/roadmap">
               Explore the roadmap
             </Link>
-            <a className="secondary-link" href="https://github.com/mkungen89/tenvra">
-              View the scaffold
-            </a>
           </div>
           <p className="disclaimer">
             No public model, compute network, contributor payments, or production API exists yet.
@@ -79,7 +80,7 @@ export default function Home() {
 
       <footer className="footer shell">
         <p>{brand.tagline}</p>
-        <p>Scaffold status · 2026</p>
+        <p>Validation stage · 2026</p>
       </footer>
     </main>
   );
