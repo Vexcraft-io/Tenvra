@@ -7,6 +7,7 @@ described production capability already exists.
 
 - [Product requirements](product/product-requirements.md)
 - [Validation plan](product/validation-plan.md)
+- [European AI sovereignty strategy](strategy/european-sovereignty.md)
 - [Reputation system](community/reputation-system.md)
 
 ## Engineering

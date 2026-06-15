@@ -10,9 +10,13 @@ Success requires all of the following:
 - 20 qualified developers or researchers.
 - 10 design-partner interviews.
 - 5 non-binding letters of intent for a paid B2B beta.
+- 5 interviews confirming that European control or EU/EEA data residency affects buying decisions.
 
 Registrations count only after email verification. Pilot compatibility is assessed against the
 current hardware, operating-system, availability, and network allowlist.
+
+The initial validation cohort prioritizes EU/EEA participants. Record country only at the
+coarsest level needed for eligibility and capacity planning.
 
 ## Decision Rule
 

@@ -14,6 +14,9 @@ Before public data collection:
 - Ninety-day raw operational-metadata retention configured.
 - Security-event exception limited and documented.
 - International transfers assessed.
+- EU/EEA-only production residency verified for prompts, generated code, identity, and ledger data.
+- Model training separated from service delivery; no implied training consent.
+- Dataset data-subject request and model-removal escalation paths documented.
 - Breach and authority-request procedures approved.
 
 Customer prompt processing requires a DPA, security appendix, subprocessor list, deletion

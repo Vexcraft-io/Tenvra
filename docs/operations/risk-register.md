@@ -12,5 +12,9 @@
 | Name or domain conflict                                  | Medium   | Clearance before launch                          | Failed professional search    |
 | Financing unavailable                                    | High     | Narrow research-only continuation                | Runway below approved floor   |
 | AMD/ROCm fragmentation                                   | Medium   | Explicit hardware and software allowlists        | Elevated backend failure rate |
+| External model API dependency                            | Critical | Self-hosted release path and provider exit tests | Loss or restriction of access |
+| Non-European production data placement                   | Critical | Region policy, contracts, and deployment gates   | Residency or transfer breach  |
+| Cloud-provider concentration                             | High     | Portable state, backups, and second restore path | Failed provider exit test     |
+| Uncontrolled continuous learning                         | Critical | Immutable candidates and explicit release gates  | Unreviewed model modification |
 
 Risks are reviewed at each phase gate and after material incidents.

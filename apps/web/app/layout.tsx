@@ -8,7 +8,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: `${brand.name} | ${brand.tagline}`,
   description:
-    "An early-stage initiative for open coding intelligence and verifiable contributor work.",
+    "A European-first initiative for open coding intelligence and verifiable contributor work.",
   referrer: "no-referrer",
 };
 

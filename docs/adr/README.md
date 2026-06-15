@@ -8,5 +8,6 @@ ADRs capture durable decisions and their tradeoffs.
 | [0002](0002-phase-isolation.md)                  | Separate phase-one and pilot trust domains    |
 | [0003](0003-signed-declarative-jobs.md)          | Signed declarative compute jobs               |
 | [0004](0004-reputation-separation.md)            | Separate XP, achievements, trust, and rewards |
+| [0005](0005-european-first-sovereignty.md)       | European-first sovereignty boundaries         |
 
 Use status values: Proposed, Accepted, Superseded, or Rejected.
