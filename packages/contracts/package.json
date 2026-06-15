@@ -20,6 +20,6 @@
     "@tenvra/typescript-config": "workspace:*",
     "eslint": "^9.34.0",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.8"
+    "vitest": "^4.1.9"
   }
 }
