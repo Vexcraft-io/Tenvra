@@ -30,3 +30,12 @@
 - Större dependency-uppdateringar ska verifieras lokalt innan merge, särskilt när flera Dependabot-PRs överlappar.
 - ESLint-majorer måste kontrolleras mot Next.js- och React-lintkedjans faktiska kompatibilitet innan de accepteras.
 - TypeScript-majorer kan kräva små kompatibilitetsjusteringar i tsconfig även när applikationskoden i övrigt är korrekt.
+- DCO-signoff krävs för alla commits; Dependabot-PRs måste cherry-pickas om de saknar signoff.
+
+## Senaste repo-status (2026-06-15)
+- PR #17 (docs) — mergad
+- PR #18 (safe deps) — mergad
+- PR #19 (risky deps replacement, utan ESLint 10) — mergad
+- PR #7 (ESLint 10) — öppen, blockerad av kompatibilitetsproblem
+- PR #20 (vitest bump) — öppen, kan granskas
+- Branch `chore/dependency-updates-risky` — innehåller nu även `user.md`, `memory.md`, `.hermes/`
