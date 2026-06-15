@@ -6,8 +6,8 @@ import { StatusPill } from "@tenvra/ui";
 const principles = [
   {
     number: "01",
-    title: "Open by design",
-    text: "Code, protocols, decisions, and measured results are intended to be inspectable.",
+    title: "European control",
+    text: "The official service targets EU/EEA governance, data residency, and critical operations.",
   },
   {
     number: "02",
@@ -35,7 +35,7 @@ export default function Home() {
           <Link href="/vision">Vision</Link>
           <Link href="/roadmap">Roadmap</Link>
           <Link href="/interest">Take part</Link>
-          <a href="https://github.com/mkungen89/tenvra">GitHub</a>
+          <a href="https://github.com/Vexcraft-io/Tenvra">GitHub</a>
         </div>
       </nav>
 
@@ -44,8 +44,8 @@ export default function Home() {
           <StatusPill>{brand.status}</StatusPill>
           <h1>{brand.headline}</h1>
           <p className="lede">
-            Tenvra is laying the foundation for open coding intelligence powered by verified
-            contributions from developers, researchers, and hardware operators.
+            Tenvra is laying the foundation for European-controlled coding intelligence powered by
+            verified contributions from developers, researchers, and hardware operators.
           </p>
           <div className="actions">
             <Link className="primary-link" href="/interest">
@@ -80,7 +80,7 @@ export default function Home() {
 
       <footer className="footer shell">
         <p>{brand.tagline}</p>
-        <p>Validation stage · 2026</p>
+        <p>Validation stage | 2026</p>
       </footer>
     </main>
   );
@@ -107,7 +107,7 @@ function NetworkVisual() {
       </svg>
       <div className="network-caption">
         <span>Concept only</span>
-        <strong>Verified work · Open protocols · Measured outcomes</strong>
+        <strong>European control | Verified work | Open protocols</strong>
       </div>
     </div>
   );

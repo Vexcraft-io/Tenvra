@@ -1,4 +1,3 @@
-module github.com/mkungen89/tenvra/clients/compute
+module github.com/Vexcraft-io/Tenvra/clients/compute
 
 go 1.24
-

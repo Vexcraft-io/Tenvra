@@ -9,6 +9,9 @@ software and protocols.
 
 ### Added
 
+- European-first sovereignty strategy covering EU/EEA governance, data residency, provider exit,
+  controlled model improvement, and model-serving independence.
+- Architecture decision and product gates for European compute pilots and production continuity.
 - Initial repository scaffold.
 - Phase 1 interest registration with qualification fields for compute, software, research, and
   design partners.

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/mkungen89/tenvra/clients/compute/internal/doctor"
+	"github.com/Vexcraft-io/Tenvra/clients/compute/internal/doctor"
 )
 
 const version = "0.0.0-scaffold"
@@ -25,4 +25,3 @@ func main() {
 		fmt.Println("usage: tenvra-compute [version|doctor]")
 	}
 }
-

@@ -2,9 +2,9 @@
 
 # Tenvra
 
-### Open intelligence. Shared value.
+### European AI independence, built in the open.
 
-An open platform for building coding intelligence through verifiable contributions from
+A European-first platform for building coding intelligence through verifiable contributions from
 developers, researchers, and independent hardware operators.
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-6f5cff.svg)](LICENSE)
@@ -13,8 +13,8 @@ developers, researchers, and independent hardware operators.
 [![AMD](https://img.shields.io/badge/Compute-AMD-ed1c24.svg)](#vision)
 [![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-22c55e.svg)](CONTRIBUTING.md)
 
-[Vision](#vision) · [Architecture](#architecture) · [Quick Start](#quick-start) ·
-[Roadmap](ROADMAP.md) · [Contributing](CONTRIBUTING.md)
+[Vision](#vision) | [Architecture](#architecture) | [Quick Start](#quick-start) |
+[Roadmap](ROADMAP.md) | [Contributing](CONTRIBUTING.md)
 
 </div>
 
@@ -22,12 +22,16 @@ developers, researchers, and independent hardware operators.
 
 ## What Is Tenvra?
 
-Tenvra is an early-stage initiative exploring a community-powered foundation for coding AI.
-The long-term goal is a network where participants can contribute approved compute, help evaluate
-and improve models, and share in the value created by useful, verified work.
+Tenvra is an early-stage initiative exploring a European-controlled, community-powered foundation
+for coding AI. The long-term goal is a network where participants can contribute approved compute,
+help evaluate and improve models, and share in the value created by useful, verified work.
 
 The project is designed for cross-platform participation, including Linux, Windows, and macOS,
 with planned support for both NVIDIA CUDA and AMD ROCm hardware.
+
+European-first means that the official service targets EU/EEA governance, production data
+residency, compute pilots, and initial customers. It does not prevent global open-source
+participation or future international use.
 
 > [!IMPORTANT]
 > Tenvra is currently in its validation and foundation phase. This repository does not yet contain
@@ -35,9 +39,11 @@ with planned support for both NVIDIA CUDA and AMD ROCm hardware.
 
 ## Vision
 
-Today's most capable AI systems are increasingly expensive and concentrated behind closed
-infrastructure. Tenvra is investigating a different path:
+Today's most capable AI systems are increasingly expensive and concentrated behind infrastructure
+outside European control. Tenvra is investigating a different path:
 
+- **European control** of production data, model releases, governance, and critical operations.
+- **Operational independence** from any single hosted model API or cloud provider.
 - **Open development** with reproducible technical decisions and public protocols.
 - **Useful compute** directed toward approved training, evaluation, and research workloads.
 - **Verifiable contributions** so rewards reflect accepted work rather than raw uptime.
@@ -46,7 +52,11 @@ infrastructure. Tenvra is investigating a different path:
 - **Responsible data** with documented licensing, provenance, and model lineage.
 
 Open community nodes are planned for approved workloads. Private customer prompts will only run on
-trusted, contracted infrastructure.
+trusted, contracted EU/EEA infrastructure.
+
+Tenvra does not plan to train production models directly on live prompts. Improvement happens
+through immutable dataset versions, signed jobs, redundant verification, evaluation gates, and
+explicit model releases.
 
 ## Project Status
 
@@ -65,6 +75,7 @@ Tenvra is currently building and validating the platform foundation.
 | Distributed workloads           | Planned                                   |
 | Contributor rewards and billing | Planned                                   |
 | Public coding model             | Not released                              |
+| EU/EEA sovereignty controls     | Defined; implementation pending           |
 
 Progress is governed by evidence gates rather than launch-date promises. See the
 [full roadmap](ROADMAP.md).
@@ -106,6 +117,9 @@ The current repository is a monorepo containing the foundations for each planned
 
 Detailed technical decisions live in [docs/architecture](docs/architecture) and
 [docs/adr](docs/adr).
+
+The [European AI sovereignty strategy](docs/strategy/european-sovereignty.md) defines the
+official service's governance, residency, portability, model-continuity, and release requirements.
 
 ## Technology
 
@@ -174,25 +188,27 @@ pnpm supabase:db:test
 ## Roadmap
 
 1. **Foundation**: repository, governance, security, contracts, and validation website.
-2. **Validation**: qualify contributors, GPU operators, researchers, and design partners.
-3. **Research pilot**: prove verifiable workloads across NVIDIA and AMD community nodes.
+2. **Validation**: qualify EU/EEA contributors, GPU operators, researchers, and design partners.
+3. **Research pilot**: prove verifiable workloads across European NVIDIA and AMD community nodes.
 4. **Compliance and security**: complete legal assessment, reviews, and penetration testing.
-5. **Paid beta**: launch trusted inference and auditable contributor economics with B2B partners.
+5. **Paid beta**: launch EU/EEA-hosted inference and auditable contributor economics with European
+   B2B partners.
 
 Milestones and success criteria are documented in [ROADMAP.md](ROADMAP.md) and the
 [product requirements](docs/product/product-requirements.md).
 
 ## Documentation
 
-| Topic                 | Document                                                     |
-| --------------------- | ------------------------------------------------------------ |
-| Product requirements  | [Product requirements](docs/product/product-requirements.md) |
-| System architecture   | [Architecture documentation](docs/architecture)              |
-| Contributor economics | [Economics documentation](docs/economics)                    |
-| Security planning     | [Security documentation](docs/security)                      |
-| Governance            | [GOVERNANCE.md](GOVERNANCE.md)                               |
-| Project support       | [SUPPORT.md](SUPPORT.md)                                     |
-| Changelog             | [CHANGELOG.md](CHANGELOG.md)                                 |
+| Topic                 | Document                                                      |
+| --------------------- | ------------------------------------------------------------- |
+| Product requirements  | [Product requirements](docs/product/product-requirements.md)  |
+| European sovereignty  | [Sovereignty strategy](docs/strategy/european-sovereignty.md) |
+| System architecture   | [Architecture documentation](docs/architecture)               |
+| Contributor economics | [Economics documentation](docs/economics)                     |
+| Security planning     | [Security documentation](docs/security)                       |
+| Governance            | [GOVERNANCE.md](GOVERNANCE.md)                                |
+| Project support       | [SUPPORT.md](SUPPORT.md)                                      |
+| Changelog             | [CHANGELOG.md](CHANGELOG.md)                                  |
 
 ## Contributing
 
@@ -234,9 +250,9 @@ domain acquisition and professional trademark clearance.
 
 <div align="center">
 
-**Tenvra is being built in the open, one verified step at a time.**
+**European coding intelligence, built in the open one verified step at a time.**
 
-[Explore the roadmap](ROADMAP.md) · [Read the docs](docs) ·
+[Explore the roadmap](ROADMAP.md) | [Read the docs](docs) |
 [Join the project](CONTRIBUTING.md)
 
 </div>
