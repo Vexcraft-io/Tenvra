@@ -23,6 +23,7 @@ described production capability already exists.
 - [Incident response](security/incident-response.md)
 - [Operations runbook](operations/runbook.md)
 - [Risk register](operations/risk-register.md)
+- [Phase 1 issue breakdown](operations/phase-1-issues.md)
 
 ## Economics And Compliance
 
