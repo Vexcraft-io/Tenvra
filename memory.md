@@ -38,17 +38,15 @@
 - TypeScript-majorer kan kräva små kompatibilitetsjusteringar i tsconfig även när applikationskoden i övrigt är korrekt.
 - DCO-signoff krävs för alla commits; Dependabot-PRs måste cherry-pickas om de saknar signoff.
 
-## Senaste repo-status (2026-06-15)
+## Senaste repo-status (2026-06-15 slutlig)
 
 - PR #17 (docs) — mergad
 - PR #18 (safe deps batch) — mergad
 - PR #19 (risky deps replacement, utan ESLint 10) — mergad
 - PR #20 (vitest 4.1.9) — stängd, ersatt av #21
 - PR #21 (vitest 4.1.9 signed) — mergad
+- PR #22 (agent context files) — mergad
 - PR #1–5, #8–9 — stängda, inkluderade i #18
-- PR #7 (ESLint 10) — öppen, blockerad av kompatibilitetsproblem med eslint-plugin-react/next-lint-kedjan
-- Branch `chore/dependency-updates-risky` — innehåller `user.md`, `memory.md`, `.hermes/`
-- Issues #12–16 — skapade
-- `user.md` — skapad, committad
-- `.hermes/CLAUDE.md` + `.hermes/model-orchestration.md` — skapade, committade
-- Skills: `tenvra-development` patchad, `tenvra-model-orchestration` skapad
+- PR #7 (ESLint 10) — **enda öppna PR**, blockerad av kompatibilitetsproblem med eslint-plugin-react/next-lint-kedjan
+- Issues #12–16 — skapade och öppna
+- `user.md`, `memory.md`, `.hermes/` — committade till main
