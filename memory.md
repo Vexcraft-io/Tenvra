@@ -34,8 +34,15 @@
 
 ## Senaste repo-status (2026-06-15)
 - PR #17 (docs) — mergad
-- PR #18 (safe deps) — mergad
+- PR #18 (safe deps batch) — mergad
 - PR #19 (risky deps replacement, utan ESLint 10) — mergad
-- PR #7 (ESLint 10) — öppen, blockerad av kompatibilitetsproblem
-- PR #20 (vitest bump) — öppen, kan granskas
-- Branch `chore/dependency-updates-risky` — innehåller nu även `user.md`, `memory.md`, `.hermes/`
+- PR #20 (vitest 4.1.9) — stängd, ersatt av #21
+- PR #21 (vitest 4.1.9 signed) — mergad
+- PR #1–5, #8–9 — stängda, inkluderade i #18
+- PR #7 (ESLint 10) — öppen, blockerad av kompatibilitetsproblem med eslint-plugin-react/next-lint-kedjan
+- Branch `chore/dependency-updates-risky` — innehåller `user.md`, `memory.md`, `.hermes/`
+- Issues #12–16 — skapade
+- `user.md` — skapad, committad
+- `.hermes/CLAUDE.md` + `.hermes/model-orchestration.md` — skapade, committade
+- Skills: `tenvra-development` patchad, `tenvra-model-orchestration` skapad
+
