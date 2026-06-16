@@ -4,6 +4,7 @@
 
 1. Supabase account (https://supabase.com/dashboard)
 2. Supabase CLI access token
+3. A local checkout of the Tenvra repo
 
 ## Step 1: Get Access Token
 
@@ -11,60 +12,60 @@ Go to https://supabase.com/dashboard/account/tokens and create a new token.
 
 ## Step 2: Login
 
+From the Tenvra repository root:
+
 ```bash
-cd C:\Users\mikae\Documents\ProjectZero
 npx supabase login --token <YOUR_TOKEN>
 ```
 
-## Step 3: Create Production Project
+## Step 3: Select or Create the Production Project
 
-```bash
-npx supabase projects create tenvra-production \
-  --region eu-central-1 \
-  --size nano \
-  --db-password <STRONG_DB_PASSWORD>
-```
-
-If the project already exists, skip creation and use the existing project ref instead. The current
-verified production candidate is:
+If the production project already exists, use it. The current verified production candidate is:
 
 - Project: `Tenvra`
 - Project ref: `qtilxphndrelkyzxwtnn`
 - Region: `eu-central-1` (Frankfurt)
+- Status: `ACTIVE_HEALTHY`
 
-Region options for EU/EEA:
+If a new production project must be created, it must stay inside an approved EU/EEA region and use a paid compute path that supports the backup controls required by `infrastructure/supabase/BACKUP-AND-RECOVERY.md`. Do **not** use London/UK for the Phase 1 production data path.
+
+Approved region options for EU/EEA:
 
 - `eu-central-1` (Frankfurt) ← recommended
 - `eu-west-1` (Ireland)
-- `eu-west-2` (London)
 - `eu-north-1` (Stockholm)
 
 ## Step 4: Link Project
 
+Use the repo's Supabase workdir so the CLI picks up `config.toml` and migrations from `infrastructure/supabase`:
+
 ```bash
-npx supabase link --project-ref <PROJECT_ID>
+npx supabase link --workdir infrastructure/supabase --project-ref <PROJECT_ID>
 ```
 
 ## Step 5: Push Database Schema
 
 ```bash
-npx supabase db push
+npx supabase db push --workdir infrastructure/supabase
 ```
 
 ## Step 6: Configure Email Templates
 
-```bash
-npx supabase email templates update confirmation --file infrastructure/supabase/templates/confirmation.html
-npx supabase email templates update recovery --file infrastructure/supabase/templates/recovery.html
-```
+Hosted Supabase email templates should be configured in the Supabase Dashboard for the production project. Do not rely on `supabase email templates update` commands here.
+
+Minimum operator check:
+
+1. Open **Authentication -> Email Templates** in the Supabase Dashboard.
+2. Paste or update the production confirmation/recovery content there.
+3. Send a test email before launch.
 
 ## Step 7: Store Credentials
 
 After setup, store these in GitHub Secrets or your hosting secrets store:
 
-- `NEXT_PUBLIC_SUPABASE_URL` — from project settings → API
-- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` — from project settings → API
-- `SUPABASE_SECRET_KEY` — from project settings → API ⚠️ keep secret
+- `NEXT_PUBLIC_SUPABASE_URL` — from project settings -> API
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` — from project settings -> API
+- `SUPABASE_SECRET_KEY` — from project settings -> API ⚠️ keep secret
 - `RATE_LIMIT_SALT` — generated secret for abuse prevention
 - `RESEND_API_KEY` — from Resend
 - `INTEREST_EMAIL_FROM` — production sender identity
@@ -87,6 +88,6 @@ Recommended minimum runtime configuration from `.env.example`:
 ## Step 8: Verify
 
 ```bash
-npx supabase status
-npx supabase test db
+npx supabase status --workdir infrastructure/supabase
+npx supabase test db --workdir infrastructure/supabase
 ```
