@@ -5,6 +5,8 @@ import "@tenvra/ui/tokens.css";
 
 import "./globals.css";
 
+import { CookieConsentBanner } from "./cookie-consent-banner";
+
 export const metadata: Metadata = {
   title: `${brand.name} | ${brand.tagline}`,
   description:
@@ -15,7 +17,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <CookieConsentBanner />
+      </body>
     </html>
   );
 }

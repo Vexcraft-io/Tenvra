@@ -31,6 +31,7 @@ export default async function InterestPage({
           <Link href="/vision">Vision</Link>
           <Link href="/roadmap">Roadmap</Link>
           <Link href="/privacy">Privacy</Link>
+          <Link href="/terms">Terms</Link>
         </div>
       </nav>
 
