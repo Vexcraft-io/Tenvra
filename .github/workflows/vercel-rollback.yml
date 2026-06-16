@@ -1,0 +1,45 @@
+name: Vercel Rollback
+
+on:
+  workflow_dispatch:
+    inputs:
+      deployment:
+        description: "Deployment URL or deployment ID to rollback/promote"
+        required: true
+        type: string
+      action:
+        description: "Which Vercel action to run"
+        required: true
+        default: rollback
+        type: choice
+        options:
+          - rollback
+          - promote
+
+permissions:
+  contents: read
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - name: Run Vercel rollback or promote
+        run: |
+          if [ "${{ inputs.action }}" = "rollback" ]; then
+            npx vercel rollback "${{ inputs.deployment }}" --yes --token="$VERCEL_TOKEN"
+          else
+            npx vercel promote "${{ inputs.deployment }}" --yes --token="$VERCEL_TOKEN"
+          fi
+
+      - name: Publish rollback summary
+        run: |
+          {
+            echo "## Vercel ${{ inputs.action }}"
+            echo
+            echo "- Deployment: ${{ inputs.deployment }}"
+            echo "- Action: ${{ inputs.action }}"
+          } >> "$GITHUB_STEP_SUMMARY"
