@@ -25,6 +25,9 @@ coverage.out
 .env
 .env.*
 !.env.example
+.vercel/
+apps/web/.vercel/
+KEYS.txt
 
 # Infrastructure
 .terraform/
