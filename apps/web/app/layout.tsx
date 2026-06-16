@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 
 import { brand } from "@tenvra/config";
 import "@tenvra/ui/tokens.css";
 
 import "./globals.css";
+
+import { CookieConsentBanner, cookieConsentName } from "./cookie-consent-banner";
 
 export const metadata: Metadata = {
   title: `${brand.name} | ${brand.tagline}`,
@@ -12,10 +15,16 @@ export const metadata: Metadata = {
   referrer: "no-referrer",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const cookieStore = await cookies();
+  const showCookieNotice = !cookieStore.has(cookieConsentName);
+
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <CookieConsentBanner initialVisible={showCookieNotice} />
+      </body>
     </html>
   );
 }

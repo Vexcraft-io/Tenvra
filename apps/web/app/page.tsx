@@ -35,6 +35,8 @@ export default function Home() {
           <Link href="/vision">Vision</Link>
           <Link href="/roadmap">Roadmap</Link>
           <Link href="/interest">Take part</Link>
+          <Link href="/privacy">Privacy</Link>
+          <Link href="/terms">Terms</Link>
           <a href="https://github.com/Vexcraft-io/Tenvra">GitHub</a>
         </div>
       </nav>
@@ -80,7 +82,11 @@ export default function Home() {
 
       <footer className="footer shell">
         <p>{brand.tagline}</p>
-        <p>Validation stage | 2026</p>
+        <div className="footer-links">
+          <Link href="/privacy">Privacy</Link>
+          <Link href="/terms">Terms</Link>
+          <span>Validation stage | 2026</span>
+        </div>
       </footer>
     </main>
   );
