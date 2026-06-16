@@ -1,0 +1,183 @@
+name: Vercel Deploy
+
+on:
+  pull_request:
+    paths:
+      - "apps/web/**"
+      - "packages/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "turbo.json"
+      - ".github/workflows/vercel-deploy.yml"
+      - ".github/workflows/vercel-rollback.yml"
+  push:
+    branches: [main]
+    paths:
+      - "apps/web/**"
+      - "packages/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "turbo.json"
+      - ".github/workflows/vercel-deploy.yml"
+      - ".github/workflows/vercel-rollback.yml"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  preview:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: vercel-preview-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    environment:
+      name: staging
+      url: ${{ steps.deploy.outputs.url }}
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - name: Check Vercel secrets
+        id: secrets
+        run: |
+          if [ -n "$VERCEL_TOKEN" ] && [ -n "$VERCEL_ORG_ID" ] && [ -n "$VERCEL_PROJECT_ID" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            {
+              echo "## Vercel preview deployment skipped"
+              echo
+              echo "Missing one or more required secrets: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID"
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - uses: actions/checkout@v6
+        if: steps.secrets.outputs.ready == 'true'
+
+      - uses: pnpm/action-setup@v4
+        if: steps.secrets.outputs.ready == 'true'
+        with:
+          version: 10.33.0
+
+      - uses: actions/setup-node@v4
+        if: steps.secrets.outputs.ready == 'true'
+        with:
+          node-version: 24.12.0
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+        if: steps.secrets.outputs.ready == 'true'
+
+      - name: Pull Vercel preview environment
+        if: steps.secrets.outputs.ready == 'true'
+        run: npx vercel --cwd apps/web pull --yes --environment=preview --token="$VERCEL_TOKEN"
+
+      - name: Build preview deployment
+        if: steps.secrets.outputs.ready == 'true'
+        run: npx vercel --cwd apps/web build --token="$VERCEL_TOKEN"
+
+      - name: Deploy preview
+        if: steps.secrets.outputs.ready == 'true'
+        id: deploy
+        run: |
+          url=$(npx vercel --cwd apps/web deploy --prebuilt --token="$VERCEL_TOKEN")
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "Preview deployment: $url" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Comment preview URL on PR
+        if: steps.secrets.outputs.ready == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const body = [
+              '## Vercel preview deployment',
+              '',
+              `- URL: ${{ steps.deploy.outputs.url }}`,
+              '- Environment: staging',
+              '- Rollback path: use the `Vercel Rollback` workflow with a prior deployment URL if needed.',
+            ].join('\n');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
+
+  production:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: vercel-production
+      cancel-in-progress: false
+    environment:
+      name: production
+      url: ${{ steps.deploy.outputs.url }}
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - name: Check Vercel secrets
+        id: secrets
+        run: |
+          if [ -n "$VERCEL_TOKEN" ] && [ -n "$VERCEL_ORG_ID" ] && [ -n "$VERCEL_PROJECT_ID" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            {
+              echo "## Vercel production deployment skipped"
+              echo
+              echo "Missing one or more required secrets: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID"
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - uses: actions/checkout@v6
+        if: steps.secrets.outputs.ready == 'true'
+
+      - uses: pnpm/action-setup@v4
+        if: steps.secrets.outputs.ready == 'true'
+        with:
+          version: 10.33.0
+
+      - uses: actions/setup-node@v4
+        if: steps.secrets.outputs.ready == 'true'
+        with:
+          node-version: 24.12.0
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+        if: steps.secrets.outputs.ready == 'true'
+
+      - name: Pull Vercel production environment
+        if: steps.secrets.outputs.ready == 'true'
+        run: npx vercel --cwd apps/web pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+      - name: Build production deployment
+        if: steps.secrets.outputs.ready == 'true'
+        run: npx vercel --cwd apps/web build --prod --token="$VERCEL_TOKEN"
+
+      - name: Deploy production
+        if: steps.secrets.outputs.ready == 'true'
+        id: deploy
+        run: |
+          url=$(npx vercel --cwd apps/web deploy --prebuilt --prod --token="$VERCEL_TOKEN")
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "Production deployment: $url" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish deployment summary
+        run: |
+          {
+            echo "## Production deployment"
+            echo
+            if [ "${{ steps.secrets.outputs.ready }}" = "true" ]; then
+              echo "- URL: ${{ steps.deploy.outputs.url }}"
+              echo "- Commit: $GITHUB_SHA"
+              echo "- Rollback workflow: Actions -> Vercel Rollback"
+            else
+              echo "- Status: skipped until Vercel secrets are configured"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
