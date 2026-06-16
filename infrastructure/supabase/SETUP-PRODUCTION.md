@@ -21,9 +21,16 @@ npx supabase login --token <YOUR_TOKEN>
 ```bash
 npx supabase projects create tenvra-production \
   --region eu-central-1 \
-  --plan free \
-  --db-postgres-version 17
+  --size nano \
+  --db-password <STRONG_DB_PASSWORD>
 ```
+
+If the project already exists, skip creation and use the existing project ref instead. The current
+verified production candidate is:
+
+- Project: `Tenvra`
+- Project ref: `qtilxphndrelkyzxwtnn`
+- Region: `eu-central-1` (Frankfurt)
 
 Region options for EU/EEA:
 
@@ -53,18 +60,29 @@ npx supabase email templates update recovery --file infrastructure/supabase/temp
 
 ## Step 7: Store Credentials
 
-After setup, store these in GitHub Secrets:
+After setup, store these in GitHub Secrets or your hosting secrets store:
 
-- `SUPABASE_URL` — from project settings → API
-- `SUPABASE_ANON_KEY` — from project settings → API
-- `SUPABASE_SERVICE_ROLE_KEY` — from project settings → API ⚠️ keep secret
+- `NEXT_PUBLIC_SUPABASE_URL` — from project settings → API
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` — from project settings → API
+- `SUPABASE_SECRET_KEY` — from project settings → API ⚠️ keep secret
+- `RATE_LIMIT_SALT` — generated secret for abuse prevention
+- `RESEND_API_KEY` — from Resend
+- `INTEREST_EMAIL_FROM` — production sender identity
+- `OPERATOR_ACCESS_TOKEN` — server-only operator bootstrap token
+- `OPERATOR_SESSION_SECRET` — generated session secret
 
-And in Vercel (or your hosting):
+Recommended minimum runtime configuration from `.env.example`:
 
-- `SUPABASE_URL`
-- `SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_SITE_URL`
 - `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+- `SUPABASE_SECRET_KEY`
+- `RATE_LIMIT_SALT`
+- `INTEREST_EMAIL_MODE=resend`
+- `RESEND_API_KEY`
+- `INTEREST_EMAIL_FROM`
+- `OPERATOR_ACCESS_TOKEN`
+- `OPERATOR_SESSION_SECRET`
 
 ## Step 8: Verify
 
