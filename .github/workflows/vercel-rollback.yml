@@ -26,20 +26,22 @@ jobs:
       name: production
     env:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_DEPLOYMENT: ${{ inputs.deployment }}
+      VERCEL_ACTION: ${{ inputs.action }}
     steps:
       - name: Run Vercel rollback or promote
         run: |
-          if [ "${{ inputs.action }}" = "rollback" ]; then
-            npx vercel rollback "${{ inputs.deployment }}" --yes --token="$VERCEL_TOKEN"
+          if [ "$VERCEL_ACTION" = "rollback" ]; then
+            npx vercel rollback "$VERCEL_DEPLOYMENT" --yes --token="$VERCEL_TOKEN"
           else
-            npx vercel promote "${{ inputs.deployment }}" --yes --token="$VERCEL_TOKEN"
+            npx vercel promote "$VERCEL_DEPLOYMENT" --yes --token="$VERCEL_TOKEN"
           fi
 
       - name: Publish rollback summary
         run: |
           {
-            echo "## Vercel ${{ inputs.action }}"
+            echo "## Vercel $VERCEL_ACTION"
             echo
-            echo "- Deployment: ${{ inputs.deployment }}"
-            echo "- Action: ${{ inputs.action }}"
+            echo "- Deployment: $VERCEL_DEPLOYMENT"
+            echo "- Action: $VERCEL_ACTION"
           } >> "$GITHUB_STEP_SUMMARY"
