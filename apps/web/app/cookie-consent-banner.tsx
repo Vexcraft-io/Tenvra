@@ -3,35 +3,17 @@
 import Link from "next/link";
 import { useState } from "react";
 
-const consentKey = "tenvra-cookie-consent-v1";
+export const cookieConsentName = "tenvra_cookie_consent";
 
-function getInitialVisibility() {
-  if (typeof window === "undefined") {
-    return false;
-  }
+type CookieConsentBannerProps = {
+  initialVisible: boolean;
+};
 
-  try {
-    return !window.localStorage.getItem(consentKey);
-  } catch {
-    return true;
-  }
-}
-
-export function CookieConsentBanner() {
-  const [visible, setVisible] = useState(getInitialVisibility);
+export function CookieConsentBanner({ initialVisible }: CookieConsentBannerProps) {
+  const [visible, setVisible] = useState(initialVisible);
 
   function acknowledge() {
-    try {
-      window.localStorage.setItem(
-        consentKey,
-        JSON.stringify({
-          acceptedAt: new Date().toISOString(),
-          scope: "essential-only",
-        }),
-      );
-    } catch {
-      // Ignore storage failures; hiding the banner avoids trapping the user.
-    }
+    document.cookie = `${cookieConsentName}=essential-only; Path=/; Max-Age=31536000; SameSite=Lax; Secure`;
     setVisible(false);
   }
 
