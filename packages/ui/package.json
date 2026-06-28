@@ -20,7 +20,7 @@
     "@tenvra/eslint-config": "workspace:*",
     "@tenvra/typescript-config": "workspace:*",
     "@types/react": "^19.1.12",
-    "eslint": "^9.34.0",
+    "eslint": "^10.6.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.9"
   },
